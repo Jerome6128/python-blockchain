@@ -27,6 +27,7 @@ class Block:
         self.difficulty = difficulty
         self.nonce = nonce
     
+    
     def __repr__(self) -> str:
         return (
             'Block('
@@ -43,6 +44,13 @@ class Block:
         return self.__dict__ == other.__dict__
     
     
+    def to_json(self):        
+        """
+        Serialize the block into a dictionary of ist attribute
+
+        """
+        return self.__dict__
+        
     @staticmethod
     def mine_block(last_block, data):
         """
@@ -61,12 +69,14 @@ class Block:
             hash = crypto_hash(timestamp, last_hash, data, difficulty, nonce)
         return Block(timestamp, last_hash, hash, data, difficulty, nonce)
 
+
     @staticmethod
     def genesis():
         """
         Generate the genesis block
         """
         return Block(**GENESIS_DATA)
+    
     
     @staticmethod
     def adjust_difficulty(last_block, new_timestamp):
