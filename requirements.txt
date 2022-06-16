@@ -13,3 +13,5 @@ pyparsing==3.0.9
 pytest==5.1.2
 wcwidth==0.2.5
 Werkzeug==2.0.3
+pubnub==4.1.6
+requests==2.22.0

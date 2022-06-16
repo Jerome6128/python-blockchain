@@ -76,6 +76,14 @@ class Block:
         Generate the genesis block
         """
         return Block(**GENESIS_DATA)
+
+
+    @staticmethod
+    def from_json(block_json):
+        """
+        Deserialize a block's json representation into a block instance
+        """
+        return Block(**block_json)
     
     
     @staticmethod
