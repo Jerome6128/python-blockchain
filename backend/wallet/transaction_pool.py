@@ -1,6 +1,3 @@
-from copyreg import add_extension
-
-
 class TransactionPool:
     def __init__(self) -> None:
         self.transaction_map = {}
@@ -19,5 +16,20 @@ class TransactionPool:
             if transaction.input['address'] == address:
                 return transaction
         
-
+    def transaction_data(self):
+        """
+        Retrurn the transactions off the transaction pool represented in their json serialized form
+        """
+        return [transaction.to_json() for transaction in self.transaction_map.values()]
    
+    def clear_blockchain_transactions(self, blockchain):
+       """
+       Delete blockchain recordedd transactions from the transaction pool
+       """
+       
+       for block in blockchain.chain:
+           for transaction in block.data:
+               try:
+                   self.transaction_map.pop(transaction['id'])
+               except KeyError:
+                   pass
